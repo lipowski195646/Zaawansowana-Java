@@ -12,6 +12,6 @@ public class Run {
 	 * @param args - no parameters
 	 */
 	public static void main(String[] args) {
-		Common.showFrame( new LoginDialog() );
+		Common.getCommonInstance().showFrame(new LoginDialog());
 	}
 }

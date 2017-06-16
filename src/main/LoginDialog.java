@@ -93,7 +93,7 @@ public class LoginDialog extends Dialog {
 				try {
 					Class<?> frame = Class.forName(frameClass);
 					RoleFrame fr = (RoleFrame) frame.newInstance();
-					Common.showFrame(fr);
+					Common.getCommonInstance().showFrame(fr);
 				} catch (ClassNotFoundException e) {
 					Common.showErrorMessage(null, "Class <" + frameClass + "> is not found!");
 				} catch (InstantiationException | IllegalAccessException e) {

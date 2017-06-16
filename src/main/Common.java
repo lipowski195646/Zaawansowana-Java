@@ -34,12 +34,14 @@ public class Common {
 	private static RefAccount registeredAccount = null;
 	private static RefUser registeredUser = null;
 	private static RefCompany registeredCompany = null;
+	private static Common common = new Common();
+	private Common() {}
 	
 	/**
 	 * Show the frame on the center of the screen
 	 * @param frame form or dialog to center 
 	 */
-	public static void showFrame(Window frame) {
+	public void showFrame(Window frame) {
 		int screenWidth = 0, screenHeight = 0;
 		
 		GraphicsDevice[] screenDevices = GraphicsEnvironment.getLocalGraphicsEnvironment().getScreenDevices();
@@ -65,7 +67,7 @@ public class Common {
 	 * @param panel panel to show
 	 * @param title title of window
 	 */
-	public static void makeFrame(JPanel panel, String title) {
+	public void makeFrame(JPanel panel, String title) {
 		Rectangle r = panel.getBounds();
 		
 		JFrame frame = new JFrame(title);
@@ -81,7 +83,7 @@ public class Common {
 	 * @param s string to convert
 	 * @return int value or zero
 	 */
-	public static int parseInt(String s) {
+	public int parseInt(String s) {
 		int n = 0;
 		try {
 			n = Integer.parseInt(s);
@@ -94,7 +96,7 @@ public class Common {
 	 * @param s string to convert
 	 * @return float value or zero
 	 */
-	public static float parseFloat(String s) {
+	public float parseFloat(String s) {
 		float f = 0;
 		try {
 			f = Float.parseFloat(s);
@@ -223,6 +225,10 @@ public class Common {
 	
 	public static void setRegisteredCompany(RefCompany company) {
 		registeredCompany = company;
+	}
+	
+	public static Common getCommonInstance() {
+		return common;
 	}
 
 }

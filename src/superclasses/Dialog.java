@@ -10,8 +10,9 @@ import javax.swing.border.LineBorder;
 /**
  * Abstract class - the base for the login dialog
  * and other abstract dialog classes
- * @author Vlad
- *
+ * @author vdidukh
+ * @since CORE_1
+ * @id
  */
 public abstract class Dialog extends JDialog {
 	private static final long serialVersionUID = 1L;
