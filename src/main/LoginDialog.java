@@ -95,9 +95,9 @@ public class LoginDialog extends Dialog {
 					RoleFrame fr = (RoleFrame) frame.newInstance();
 					Common.getCommonInstance().showFrame(fr);
 				} catch (ClassNotFoundException e) {
-					Common.showErrorMessage(null, "Class <" + frameClass + "> is not found!");
+					Common.getCommonInstance().showErrorMessage(null, "Class <" + frameClass + "> is not found!");
 				} catch (InstantiationException | IllegalAccessException e) {
-					Common.showErrorMessage(null, "Error creating object of class <" + frameClass + ">!");
+					Common.getCommonInstance().showErrorMessage(null, "Error creating object of class <" + frameClass + ">!");
 				}
 			}
 		});

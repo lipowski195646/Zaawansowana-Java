@@ -109,7 +109,7 @@ public class Common {
 	 * @param cmp component to link message (or null)
 	 * @param message text of the message
 	 */
-	public static void showInfo(Component cmp, String message) {
+	public void showInfo(Component cmp, String message) {
 		JOptionPane.showMessageDialog(cmp, message, "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
@@ -118,7 +118,7 @@ public class Common {
 	 * @param cmp component to link message (or null)
 	 * @param message text of the message
 	 */
-	public static void showErrorMessage(Component cmp, String message) {
+	public void showErrorMessage(Component cmp, String message) {
 		JOptionPane.showMessageDialog(cmp, message, "Error!", JOptionPane.ERROR_MESSAGE);
 	}
 	/**
@@ -128,7 +128,7 @@ public class Common {
 	 * @param title title of the message
 	 * @return result of choice
 	 */
-	public static int showConfirmDialog(Component cmp, String message, String title) {
+	public int showConfirmDialog(Component cmp, String message, String title) {
 		Object[] options = { "Yes", "No" };
         return JOptionPane.showOptionDialog(
         		cmp, message, title,

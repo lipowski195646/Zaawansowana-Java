@@ -82,7 +82,7 @@ public abstract class RoleFrame extends JFrame implements ActionListener {
 	 * Action on exit
 	 */
 	private void closeFrame(java.awt.AWTEvent evt) {
-		if (Common.showConfirmDialog(this, "You really want to exit?", "Exit") == Constants.YES) 
+		if (Common.getCommonInstance().showConfirmDialog(this, "You really want to exit?", "Exit") == Constants.YES) 
 			System.exit(0);
     }
 	
@@ -110,7 +110,7 @@ public abstract class RoleFrame extends JFrame implements ActionListener {
 		switch (e.getActionCommand()) {
 		case "LOGOUT":
 			dispose();
-			Common.showFrame(new LoginDialog());
+			Common.getCommonInstance().showFrame(new LoginDialog());
 			break;
 		default:
 			break;
