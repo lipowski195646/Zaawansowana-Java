@@ -12,6 +12,7 @@ superclasses/RoleFrame$2.class
 main/Constants.class
 superclasses/Entity.class
 superclasses/RoleFrame$1.class
+superclasses/DataManager.class
 main/LoginDialog$3.class
 main/Common.class
 superclasses/Dialog.class
