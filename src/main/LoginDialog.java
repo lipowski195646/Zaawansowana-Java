@@ -13,12 +13,6 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import superclasses.Dialog;
-import superclasses.RoleFrame;
-import entities.RefAccount;
-import entities.RefUser;
-import datamanagers.RefAccountDM;
-import datamanagers.RefCompanyDM;
-import datamanagers.RefUserDM;
 
 /**
  * Show login dialog and set common appliaction variables (after login) 
@@ -79,34 +73,7 @@ public class LoginDialog extends Dialog {
 
 		super.btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				String login = editLogin.getText();
-				String password = new String(editPassword.getPassword());
 				
-				RefAccount account = new RefAccountDM().getAccountByLoginPassword(login, password);
-				
-				if (account != null) {
-					dispose();
-					
-					RefUser user = new RefUserDM().getUserByAccount(account.getId());
-					
-					Common.setRegisteredAccount(account);
-					Common.setRegisteredUser(user);
-					Common.setRegisteredCompany(new RefCompanyDM().getCompany());
-					
-					// class reflection - select role interface form
-					String frameClass = Constants.ROLEFRAMES_PACKAGE + Common.getRegisteredAccount().getRole() + "Frame";
-					try {
-						Class<?> frame = Class.forName(frameClass);
-						RoleFrame fr = (RoleFrame) frame.newInstance();
-						Common.showFrame(fr);
-					} catch (ClassNotFoundException e) {
-						Common.showErrorMessage(null, "Class <" + frameClass + "> is not found!");
-					} catch (InstantiationException | IllegalAccessException e) {
-						Common.showErrorMessage(null, "Error creating object of class <" + frameClass + ">!");
-					}
-				} else {
-					Common.showErrorMessage(contentPane, "Invalid user name or password!");
-				}
 			}
 		});
 		

@@ -17,10 +17,6 @@ import javax.swing.text.DocumentFilter;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 
-import entities.RefAccount;
-import entities.RefCompany;
-import entities.RefUser;
-
 /**
  * Common static methods
  * @author vdidukh
@@ -29,33 +25,6 @@ import entities.RefUser;
  *
  */
 public class Common {
-	private static RefAccount registeredAccount = null;
-	private static RefUser registeredUser = null;
-	private static RefCompany registeredCompany = null;
-	
-	public static RefAccount getRegisteredAccount() {
-		return registeredAccount;
-	}
-	
-	public static void setRegisteredAccount(RefAccount account) {
-		registeredAccount = account;
-	}
-	
-	public static RefUser getRegisteredUser() {
-		return registeredUser;
-	}
-
-	public static void setRegisteredUser(RefUser registeredUser) {
-		Common.registeredUser = registeredUser;
-	}
-	
-	public static RefCompany getRegisteredCompany() {
-		return registeredCompany;
-	}
-	
-	public static void setRegisteredCompany(RefCompany company) {
-		registeredCompany = company;
-	}
 	
 	/**
 	 * Show the frame on the center of the screen
@@ -174,7 +143,7 @@ public class Common {
 	 * @return DocumentFilter to use with the text fields 
 	 */
 	private static DocumentFilter getTextFilter(String filterType) {
-		String bannedSymbols = filterType.toUpperCase().equals("FLOAT") ? "[^0123456789.]" : "[^0123456789]";
+		final String bannedSymbols = filterType.toUpperCase().equals("FLOAT") ? "[^0123456789.]" : "[^0123456789]";
 		
 		return new DocumentFilter() {
 		    @Override
