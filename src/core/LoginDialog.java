@@ -22,8 +22,9 @@ import datamanagers.RefUserDM;
 
 /**
  * Show login dialog and set common appliaction variables (after login) 
- * @author Vlad
- *
+ * @author vdidukh
+ * @since CORE_1
+ * @id
  */
 public class LoginDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
