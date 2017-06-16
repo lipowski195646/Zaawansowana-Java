@@ -23,8 +23,6 @@ import superclasses.Dialog;
 public class LoginDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
 	
-    private JPanel contentPane;
-    
     /**
      * Handler for dialog fields and buttons
      * @return key listener
