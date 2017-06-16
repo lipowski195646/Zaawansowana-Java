@@ -8,11 +8,14 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 
 import superclasses.Dialog;
+import superclasses.RoleFrame;
+import entities.RefAccount;
+import entities.RefCompany;
+import entities.RefUser;
 
 /**
  * Show login dialog and set common appliaction variables (after login) 
@@ -23,6 +26,7 @@ import superclasses.Dialog;
 public class LoginDialog extends Dialog {
 	private static final long serialVersionUID = 1L;
 	
+    
     /**
      * Handler for dialog fields and buttons
      * @return key listener
@@ -55,13 +59,13 @@ public class LoginDialog extends Dialog {
 		lblPassword.setBounds(12, 52, 73, 14);
 		panelFields.add(lblPassword);
 		
-		JTextField editLogin = new JTextField();
+		final JTextField editLogin = new JTextField();
 		editLogin.addKeyListener(exitOnEsc());
 		editLogin.setBounds(95, 21, 122, 20);
 		editLogin.setText("admin");
 		panelFields.add(editLogin);
 				
-		JPasswordField editPassword = new JPasswordField();
+		final JPasswordField editPassword = new JPasswordField();
 		editPassword.addKeyListener(exitOnEsc());
 		editPassword.setBounds(95, 50, 122, 20);
 		editPassword.setText("123");
@@ -71,7 +75,30 @@ public class LoginDialog extends Dialog {
 
 		super.btnOK.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				//TODO: write data managers
 				
+				//String login = editLogin.getText();
+				//String password = new String(editPassword.getPassword());
+				
+				RefAccount account = null;
+				RefUser user = null;
+				RefCompany company = null;
+				
+				Common.setRegisteredAccount(account);
+				Common.setRegisteredUser(user);
+				Common.setRegisteredCompany(company);
+				
+				// class reflection - select role interface form
+				String frameClass = Constants.ROLEFRAMES_PACKAGE + Common.getRegisteredAccount().getRole() + "Frame";
+				try {
+					Class<?> frame = Class.forName(frameClass);
+					RoleFrame fr = (RoleFrame) frame.newInstance();
+					Common.showFrame(fr);
+				} catch (ClassNotFoundException e) {
+					Common.showErrorMessage(null, "Class <" + frameClass + "> is not found!");
+				} catch (InstantiationException | IllegalAccessException e) {
+					Common.showErrorMessage(null, "Error creating object of class <" + frameClass + ">!");
+				}
 			}
 		});
 		

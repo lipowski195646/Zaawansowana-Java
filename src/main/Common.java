@@ -14,6 +14,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.DocumentFilter;
+
+import entities.RefAccount;
+import entities.RefCompany;
+import entities.RefUser;
+
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
 
@@ -25,6 +30,10 @@ import javax.swing.text.BadLocationException;
  *
  */
 public class Common {
+	
+	private static RefAccount registeredAccount = null;
+	private static RefUser registeredUser = null;
+	private static RefCompany registeredCompany = null;
 	
 	/**
 	 * Show the frame on the center of the screen
@@ -190,6 +199,30 @@ public class Common {
 		res = res.equals("-0") ? "0" : res;
 		
 		return res;
+	}
+
+	public static RefAccount getRegisteredAccount() {
+		return registeredAccount;
+	}
+	
+	public static void setRegisteredAccount(RefAccount account) {
+		registeredAccount = account;
+	}
+	
+	public static RefUser getRegisteredUser() {
+		return registeredUser;
+	}
+
+	public static void setRegisteredUser(RefUser registeredUser) {
+		Common.registeredUser = registeredUser;
+	}
+	
+	public static RefCompany getRegisteredCompany() {
+		return registeredCompany;
+	}
+	
+	public static void setRegisteredCompany(RefCompany company) {
+		registeredCompany = company;
 	}
 
 }
