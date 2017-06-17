@@ -14,8 +14,9 @@ import main.Common;
 
 /**
  * Abstract class - the base for the database connect classes
- * (package "datamanagers") 
- * @author Vlad
+ * @author vdidukh
+ * @since CORE_1
+ * @id
  *
  */
 public abstract class DataManager {
