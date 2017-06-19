@@ -13,7 +13,7 @@ public class RefUserPF extends PrintForm {
 	
 	@Override
 	public void print(Entity ent) {
-		Common.showInfo(null, "" + ent);
+		Common.getCommonInstance().showInfo(null, "" + ent);
 	}
 
 }
