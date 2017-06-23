@@ -151,13 +151,13 @@ public class AdminFrame extends RoleFrame {
 			super.showListPanel(new listpanels.DocSalaryLP());
 			break;
 		case ACCOUNTS:
-			Common.makeFrame(new listpanels.RefAccountLP(300), "Work with accounts");
+			Common.getCommonInstance().makeFrame(new listpanels.RefAccountLP(300), "Work with accounts");
 			break;
 		case COMPANIES:
 			listpanels.RefCompanyLP clp = new listpanels.RefCompanyLP(1000);
 			clp.disableButton("Add");
 			clp.disableButton("Delete");
-			Common.makeFrame(clp, "Work with companies");
+			Common.getCommonInstance().makeFrame(clp, "Work with companies");
 			break;
 		case VIEW_USERS:
 			listpanels.RefUserLP ulp = new listpanels.RefUserLP();

@@ -90,12 +90,12 @@ public class DocSalaryED extends EditDialogDoc {
 		DocSalary salary = (DocSalary) ent;
 		
 		if (salary.getDaysAll() == 0) {
-	    	Common.showErrorMessage(this, "The number of calendar days is zero!");
+	    	Common.getCommonInstance().showErrorMessage(this, "The number of calendar days is zero!");
 	    	return false;
 	    }
 		
 		if (salary.getDaysWork() == 0) {
-	    	Common.showErrorMessage(this, "The number of working days is zero!");
+	    	Common.getCommonInstance().showErrorMessage(this, "The number of working days is zero!");
 	    	return false;
 	    }
 

@@ -3,9 +3,6 @@ package superclasses;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.util.List;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,18 +19,18 @@ import superclasses.ListPanel;
 /**
  * Abstract class - the base for the dialogs (references and document items)
  * (package "editdialogs") and abstract EditDialogDoc class
- * @author vdidukh
- * @since CORE_1
- * @id
+ * @author Vlad
+ *
  */
 public abstract class EditDialog extends Dialog implements ActionListener {
 	private static final long serialVersionUID = 1L;
-	private static final String SAVE = "SAVE", CANCEL = "CANCEL";
+	private static final String SAVE = "SAVE", CANCEL = "CANCEL", PRINT = "PRINT";
 	
 	protected abstract Entity entityFromFields();
 	protected IntTextField txtId;
 	protected boolean readOnly = false;
 	protected EditDialogDoc parentDialog = null;	// for document items
+	protected JButton btnPrint;
 	
 	/**
 	 * For references
@@ -57,6 +54,12 @@ public abstract class EditDialog extends Dialog implements ActionListener {
 		txtId.setBounds(80, 5, 50, 25);
 		txtId.setEditable(false);
 		super.panelFields.add(txtId);
+		
+		btnPrint = new JButton("Print");
+		btnPrint.setActionCommand(PRINT);
+		btnPrint.addActionListener(this);
+		btnPrint.setVisible(!printFormClassName().isEmpty());
+		super.panelButtons.add(btnPrint);
 	}
 	
 	/**
@@ -76,7 +79,7 @@ public abstract class EditDialog extends Dialog implements ActionListener {
 		boolean isEnabled = !readOnly;
 		this.readOnly = readOnly;
 		
-		Component[] components = super.panelFields.getComponents();
+		Component[] components = panelFields.getComponents();
 		
 		for (Component component : components) {
 			if (component instanceof JButton)
@@ -96,37 +99,22 @@ public abstract class EditDialog extends Dialog implements ActionListener {
 	}
 	
 	/**
-     * Handler for dialog fields and buttons
-     * @return key listener
-     */
-    private KeyListener exitOnEsc() {
-		return new KeyAdapter() {
-			@Override
-			public void keyPressed(KeyEvent e) {
-				if(e.getKeyCode() == KeyEvent.VK_ESCAPE)
-					dispose();
-			}
-		};
-	}
-	
-    /**
-     * Set exitOnEsc listener to each element of form (use in subclasses after initialization)
-     */
-    protected void setListener() {
-		for (Component component : super.panelFields.getComponents())
-			component.addKeyListener(exitOnEsc());
-		
-		for (Component component : super.panelButtons.getComponents())
-			component.addKeyListener(exitOnEsc());
-	}
-	
-	/**
 	 * The method can be overrided by subclass to block saving
 	 * @param ent entity linked to form
 	 * @return decision 
 	 */
 	protected boolean extraSaveCheck(Entity ent) {
     	return true;
+    }
+	
+	/**
+	 * The method can be overrided by subclass.
+	 * Subclass can set the class name of print form.
+	 * If set - the print button is visible
+	 * @return the class name of print form
+	 */
+	protected String printFormClassName() {
+    	return "";
     }
 	
 	/**
@@ -152,6 +140,24 @@ public abstract class EditDialog extends Dialog implements ActionListener {
 			dispose();
 			break;
 			
+		case PRINT:
+			String printFormName = printFormClassName();
+			
+			if (!printFormName.isEmpty()) {
+				// class reflection - creating print form
+				try {
+					Class<?> cl = Class.forName(printFormName);
+					PrintForm printFormClass = (PrintForm) cl.newInstance();
+					printFormClass.print(ent);
+				} catch (ClassNotFoundException e) {
+					Common.getCommonInstance().showErrorMessage(this, "Class <" + printFormName + "> is not found!");
+				} catch (InstantiationException | IllegalAccessException e) {
+					Common.getCommonInstance().showErrorMessage(this, "Error creating object of class <" + printFormName + ">!");
+				}
+			}
+			
+			break;
+
 		default:
 			break;
 		}

@@ -90,7 +90,7 @@ public class RefAccountED extends EditDialog {
 		String login = ((RefAccount) ent).getLogin();
 		
 		if (new RefAccountDM().isAccountExists(id, login)) {
-	    	Common.showErrorMessage(this, "Account '" + login + "' already exists!");
+	    	Common.getCommonInstance().showErrorMessage(this, "Account '" + login + "' already exists!");
 	    	return false;
 	    }
 

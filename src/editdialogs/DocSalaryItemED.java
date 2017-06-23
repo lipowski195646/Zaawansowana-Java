@@ -227,7 +227,7 @@ public class DocSalaryItemED extends EditDialog {
 		String userName = salaryItem.getUserName();
 		
 		if (new DocSalaryItemDM(salaryId).isUserSalaryExists(id, userId)) {
-	    	Common.showErrorMessage(this, "Salary for '" + userName + "' is already calculated!");
+	    	Common.getCommonInstance().showErrorMessage(this, "Salary for '" + userName + "' is already calculated!");
 	    	return false;
 	    }
 

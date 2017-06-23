@@ -31,10 +31,10 @@ public class StockFrame extends RoleFrame {
 		
 		switch (e.getActionCommand()) {
 		case "ACTION1":
-			main.Common.showErrorMessage(this, "ActionSale1");
+			main.Common.getCommonInstance().showErrorMessage(this, "ActionSale1");
 			break;
 		case "ACTION2":
-			main.Common.showErrorMessage(this, "ActionSale2");
+			main.Common.getCommonInstance().showErrorMessage(this, "ActionSale2");
 			break;
 		default:
 			break;

@@ -231,7 +231,7 @@ public class RefUserED extends EditDialog {
 		String login = user.getLogin();
 		
 		if (new RefUserDM().isAccountInUse(id, accountId)) {
-	    	Common.showErrorMessage(this, "Account '" + login + "' is already in use!");
+	    	Common.getCommonInstance().showErrorMessage(this, "Account '" + login + "' is already in use!");
 	    	return false;
 	    }
 

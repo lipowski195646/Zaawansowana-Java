@@ -50,18 +50,18 @@ public class RefAccountLP extends ListPanel {
 		int id = ent.getId();
 		
 		if (id == 1) {
-	    	Common.showErrorMessage(this, "You can't delete default account!");
+	    	Common.getCommonInstance().showErrorMessage(this, "You can't delete default account!");
 	    	return false;
 	    }
 		
 		if (Common.getRegisteredAccount().getId() == id) {
-	    	Common.showErrorMessage(this, "You can't delete yours own account!");
+	    	Common.getCommonInstance().showErrorMessage(this, "You can't delete yours own account!");
 	    	return false;
 	    }
 		
 		if (new RefUserDM().isAccountInUse(id)) {
 			String login = ((RefAccount) ent).getLogin();
-	    	Common.showErrorMessage(this, "Account '" + login + "' is already in use!");
+	    	Common.getCommonInstance().showErrorMessage(this, "Account '" + login + "' is already in use!");
 	    	return false;
 	    }
 		

@@ -14,6 +14,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
 
+import entities.RefUser;
 import main.Common;
 import main.Constants;
 import main.LoginDialog;
@@ -21,9 +22,8 @@ import main.LoginDialog;
 /**
  * Abstract class - the base for the interface forms
  * (package "roleframes")
- * @author vdidukh
- * @since CORE_1
- * @id
+ * @author Vlad
+ *
  */
 public abstract class RoleFrame extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -89,19 +89,20 @@ public abstract class RoleFrame extends JFrame implements ActionListener {
 	/**
 	 * Title of the form - [custom title] + company info + [user info] + account info 
 	 * @param title custom title
-	 * 
 	 */
 	protected void showTitle(String title) {
-		//TODO: refaktor
+		RefUser user = Common.getRegisteredUser();
+		String userPart = user == null ? " " : " , user: " + user;
+		setTitle(title + Common.getRegisteredCompany() + userPart +  ", account: " + Common.getRegisteredAccount());
 	}
 	
 	/**
 	 * Show the given panel inside the form
 	 * @param listPanel panel to show
 	 */
-	protected void showListPanel() {
-		//TODO: refaktor
+	protected void showListPanel(ListPanel listPanel) {
 		dataPanel.removeAll();
+		dataPanel.add(listPanel, BorderLayout.CENTER);
 		SwingUtilities.updateComponentTreeUI(dataPanel);
 	}
 
